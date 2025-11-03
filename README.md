@@ -30,7 +30,7 @@ Python · TensorFlow · Scikit-Learn · Pandas · NumPy · Gradio
 
 ## ✨ Credits
 Developed with passion by **Kishore Ram M** from **Tenkasi, Tamil Nadu** 🕉️  
-Proudly made in **India** 🇮🇳
+
 
 ---
 
