@@ -9,10 +9,10 @@ tensorflow==2.17.0
 
 # Visualization
 matplotlib==3.9.2
+Pillow==10.4.0
 
-# Web Interface
-gradio==4.44.0
+# Web Interface (replaced Gradio)
+streamlit==1.38.0
 
 # Utility
 requests==2.32.3
-
