@@ -21,7 +21,7 @@ The deep learning model (GRU) helps identify **market trends**, supports **tradi
 - **RMSE:** ${rmse:.2f}
 
 ## 🧩 Tech Stack
-Python · TensorFlow · Scikit-Learn · Pandas · NumPy · Gradio
+Python · TensorFlow · Scikit-Learn · Pandas · NumPy · Stremlit
 
 ## 🌐 Connect with Me
 - [LinkedIn](https://www.linkedin.com/in/kishoreramm/)  
@@ -29,7 +29,7 @@ Python · TensorFlow · Scikit-Learn · Pandas · NumPy · Gradio
 - [Portfolio](https://zencoder-portfolio.vercel.app/)
 
 ## ✨ Credits
-Developed with passion by **Kishore Ram M** from **Tenkasi, Tamil Nadu** 🕉️  
+Developed with passion by **Kishore Ram M**
 
 
 ---
