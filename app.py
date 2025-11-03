@@ -232,72 +232,99 @@ def predict_gold_price():
     )
 
 print(" Live prediction function built.")
+import streamlit as st
+from PIL import Image
 
-import gradio as gr
+st.set_page_config(
+    page_title="Goldu Meter Pro — AI Gold Price Predictor",
+    page_icon="💎",
+    layout="centered"
+)
 
+st.markdown("""
+    <style>
+    body {
+        background: linear-gradient(180deg, #1c1c1c, #2b2b2b);
+        color: #FFD700;
+        font-family: 'Poppins', sans-serif;
+    }
+    h1, h2, h3 {
+        color: #FFD700;
+        text-align: center;
+        font-weight: 700;
+    }
+    .stButton>button {
+        background: linear-gradient(90deg, #FFD700, #DAA520);
+        color: black;
+        border-radius: 12px;
+        font-size: 18px;
+        font-weight: 600;
+        border: none;
+        transition: 0.3s;
+    }
+    .stButton>button:hover {
+        background: linear-gradient(90deg, #ffcc00, #ffb300);
+        transform: scale(1.03);
+    }
+    .stMarkdown {
+        color: #fff5cc;
+        font-size: 16px;
+        text-align: justify;
+    }
+    .css-18e3th9 {
+        padding-top: 2rem;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
-print("Launching Gradio interface...")
-
-# App description
 description = f"""
 # 💎 Goldu Meter Pro 🇮🇳
-### (v5.0 - GRU Deep Learning Model)
+### (v5.0 — GRU Deep Learning Model)
 
-Developed by: **Kishore Ram M**
+Developed by: **Kishore Ram M**  
 _“Born in Tenkasi, built with Tamil spirit & tech passion.”_
 
-**Model Performance:**
-- R²: {{r2:.4f}}
-- MAE: ${{mae:.2f}}
-- RMSE: ${{rmse:.2f}}
+**Model Performance:**  
+- **R²:** {r2:.4f}  
+- **MAE:** ${mae:.2f}  
+- **RMSE:** ${rmse:.2f}
 """
+st.markdown(description)
 
-# Profile and credits section (HTML)
+if st.button("🔮 Predict Next Day's Gold Price"):
+    prediction = predict_gold_price()
+    st.markdown(f"### 💰 Prediction Result:\n{prediction}")
+else:
+    st.info("Click the button above to get the AI-powered gold price prediction.")
+
+# Images section
+st.markdown("---")
+try:
+    st.image("goldu_prediction_plot.png", caption="📈 Predicted Gold Price Trend", use_container_width=True)
+except:
+    st.warning("Prediction trend image not found.")
+
+try:
+    st.image("goldu_training_loss.png", caption="🧠 Model Training Loss Curve", use_container_width=True)
+except:
+    st.warning("Training loss image not found.")
+
 profile_html = """
 <div style="font-family: 'Poppins', sans-serif; text-align: center; padding: 20px;">
-    <h2 style="color: #0078D7;">👨‍💻 Connect with Me</h2>
+    <h2 style="color: #FFD700;">👨‍💻 Connect with Me</h2>
     <p>
-        <a href="https://github.com/KishoreRam-M" target="_blank" style="text-decoration:none; color:#333; font-size:18px;">
-            🧠 GitHub
-        </a> |
-        <a href="https://www.linkedin.com/in/kishoreramm/" target="_blank" style="text-decoration:none; color:#0A66C2; font-size:18px;">
-            💼 LinkedIn
-        </a> |
-        <a href="https://www.geeksforgeeks.org/user/kishorera8zln/" target="_blank" style="text-decoration:none; color:#0F9D58; font-size:18px;">
-            🧩 GeeksforGeeks
-        </a> |
-        <a href="https://zencoder-portfolio.vercel.app/" target="_blank" style="text-decoration:none; color:#A020F0; font-size:18px;">
-            🌐 Portfolio
-        </a>
+        <a href="https://github.com/KishoreRam-M" target="_blank" style="text-decoration:none; color:#FFD700; font-size:18px;">🧠 GitHub</a> |
+        <a href="https://www.linkedin.com/in/kishoreramm/" target="_blank" style="text-decoration:none; color:#FFD700; font-size:18px;">💼 LinkedIn</a> |
+        <a href="https://www.geeksforgeeks.org/user/kishorera8zln/" target="_blank" style="text-decoration:none; color:#FFD700; font-size:18px;">🧩 GeeksforGeeks</a> |
+        <a href="https://zencoder-portfolio.vercel.app/" target="_blank" style="text-decoration:none; color:#FFD700; font-size:18px;">🌐 Portfolio</a>
     </p>
-
     <p>
-        📧 <a href="mailto:kishoreramm.dev@gmail.com" style="text-decoration:none; color:#D93025; font-size:18px;">
-        kishoreramm.dev@gmail.com
-        </a>
+        📧 <a href="mailto:kishoreramm.dev@gmail.com" style="text-decoration:none; color:#FFD700; font-size:18px;">kishoreramm.dev@gmail.com</a>
     </p>
-
-    <p style="margin-top: 20px; font-size:14px; color:gray;">
+    <p style="margin-top: 20px; font-size:14px; color:#FFD700;">
         Made with ❤️ by <b>Kishore Ram M</b> from <b>Tenkasi, Tamil Nadu</b><br>
         <i>“Code crafted in Tamil Nadu, shining in global markets.”</i>
     </p>
 </div>
 """
-
-# Gradio Interface
-with gr.Blocks(theme=gr.themes.Soft(), title="Goldu Meter Pro — AI Gold Price Predictor") as iface:
-    gr.Markdown(description)
-
-    with gr.Row():
-        predict_button = gr.Button("🔮 Predict Next Day's Gold Price", variant="primary")
-
-    output_markdown = gr.Markdown("Click the button above to get the AI-powered prediction...")
-
-    predict_button.click(predict_gold_price, inputs=[], outputs=[output_markdown])
-
-    gr.Image("goldu_prediction_plot.png", label="📈 Predicted Gold Price Trend")
-    gr.Image("goldu_training_loss.png", label="🧠 Model Training Loss Curve")
-
-    gr.HTML(profile_html)
-
-iface.launch()
+st.markdown(profile_html, unsafe_allow_html=True)
